@@ -31,6 +31,9 @@ const resolvers = {
     },
     //Project
     addProject: async (_parent, { name, description, status, clientId }) => {
+      if (!["NOT_STARTED", "IN_PROGRESS", "COMPLETED"].includes(status)) {
+        throw new Error("Invalid status value");
+      }
       const project = new Project({ name, description, status, clientId });
       return await project.save();
     },

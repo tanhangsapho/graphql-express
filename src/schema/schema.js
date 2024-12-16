@@ -23,11 +23,17 @@ const schema = buildSchema(`
     client(id: ID!): Client
   }
 
+  enum ProjectStatus {
+    NOT_STARTED
+    IN_PROGRESS
+    COMPLETED
+  }
+    
   type Mutation {
     addClient(name: String!, email: String!, phone: String!): Client
     deleteClient(id: ID!): Client
     updateClient(id: ID!, name: String, email: String, phone: String): Client
-    addProject(name: String!, description: String!, status: String!, clientId: ID!): Project
+    addProject(name: String!, description: String!, status: ProjectStatus!, clientId: ID!): Project
     deleteProject(id: ID!): Project
     updateProject(id: ID!, name: String, description: String, status: String, clientId: ID): Project
   }
